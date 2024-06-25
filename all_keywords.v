@@ -60,7 +60,7 @@ module all_verilog_keywords (
 );
 
     // Verilog Keywords
-
+    reg out_data1, out_data2, out_data3, reg_out1;
     // Continuous Assignment
     assign out_data = (select == 2'b00) ? in_data[0] : (select == 2'b01) ? in_data[1] : (select == 2'b10) ? in_data[2] : in_data[3];
 
@@ -76,47 +76,47 @@ module all_verilog_keywords (
     // Nonblocking Assignment
     always @ (posedge clk) begin
         if (select == 2'b00) begin
-            out_data <= in_data[0];
+            out_data1 <= in_data[0];
         end else if (select == 2'b01) begin
-            out_data <= in_data[1];
+            out_data1 <= in_data[1];
         end else if (select == 2'b10) begin
-            out_data <= in_data[2];
+            out_data1 <= in_data[2];
         end else begin
-            out_data <= in_data[3];
+            out_data1 <= in_data[3];
         end
     end
 
     // Procedural Continuous Assignment
     always @* begin
         if (select == 2'b00) begin
-            reg_out = in_data[0];
+            reg_out1 = in_data[0];
         end else if (select == 2'b01) begin
-            reg_out = in_data[1];
+            reg_out1 = in_data[1];
         end else if (select == 2'b10) begin
-            reg_out = in_data[2];
+            reg_out1 = in_data[2];
         end else begin
-            reg_out = in_data[3];
+            reg_out1 = in_data[3];
         end
     end
 
     // Procedural Blocks
     always @ (posedge clk) begin
         case (select)
-            2'b00: out_data = in_data[0];
-            2'b01: out_data = in_data[1];
-            2'b10: out_data = in_data[2];
-            default: out_data = in_data[3];
+            2'b00: out_data2 = in_data[0];
+            2'b01: out_data2 = in_data[1];
+            2'b10: out_data2 = in_data[2];
+            default: out_data2 = in_data[3];
         endcase
     end
 
     // Conditional Statement
     always @* begin
         if (in_data[0] && in_data[1])
-            out_data = 1'b1;
+            out_data3 = 1'b1;
         else if (in_data[2] || in_data[3])
-            out_data = 1'b0;
+            out_data3 = 1'b0;
         else
-            out_data = 1'bz;
+            out_data3 = 1'bz;
     end
 
 endmodule
